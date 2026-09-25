@@ -1,0 +1,29 @@
+seed: 6304
+
+pacs:
+  root: ./pacs_data          # expects <root>/{photo,art_painting,cartoon,sketch}/<class>/*.jpg
+  source_domains: [photo, art_painting, cartoon]
+  target_domain: sketch
+  train_val_split: 0.8
+
+batch:
+  per_source_domain: 8        # -> 24 total source examples per step
+  target: 24                  # -> 48 total examples per step
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  max_epochs: 30
+  early_stop_patience: 5      # epochs without improvement in mean source-val macro-F1
+
+backbone:
+  weights: IMAGENET1K_V1
+  feat_dim: 512
+
+discriminator:
+  hidden_dim: 256
+  dropout: 0.5
+
+paths:
+  results_dir: ./results
+  checkpoints_dir: ./results/checkpoints

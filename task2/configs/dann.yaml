@@ -1,0 +1,4 @@
+base_config: base.yaml
+method: dann
+run_name: dann
+max_alpha: 1.0   # controlled design study sweeps this over {0.25, 0.5, 1}

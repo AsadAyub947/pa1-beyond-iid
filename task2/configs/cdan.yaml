@@ -1,0 +1,4 @@
+base_config: base.yaml
+method: cdan
+run_name: cdan
+max_alpha: 1.0   # same GRL schedule/shape as DANN; not part of the controlled study

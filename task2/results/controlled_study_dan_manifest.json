@@ -1,0 +1,9 @@
+{
+  "study": "dan",
+  "key": "lambda_mmd",
+  "runs": {
+    "0.1": "./results/checkpoints/dan_lambda_mmd0.1.pt",
+    "1": "./results/checkpoints/dan.pt",
+    "10": "./results/checkpoints/dan_lambda_mmd10.pt"
+  }
+}

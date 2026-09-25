@@ -1,0 +1,4 @@
+base_config: base.yaml
+method: dan
+run_name: dan
+lambda_mmd: 1.0   # controlled design study sweeps this over {0.1, 1, 10}
