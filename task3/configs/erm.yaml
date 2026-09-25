@@ -1,0 +1,6 @@
+base_config: base.yaml
+method: erm
+run_name: erm
+# ERM is NOT retrained in Task 3. This config exists only so evaluate_sketch.py
+# has a consistent config to read `paths.task2_source_only_checkpoint` from.
+# Do NOT pass this file to train.py -- it will refuse and point you here.

@@ -1,0 +1,4 @@
+base_config: base.yaml
+method: dan_dg
+run_name: dan_dg
+lambda_dg: 1.0   # controlled design study sweeps this over {0.1, 1, 10}

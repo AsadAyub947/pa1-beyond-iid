@@ -1,0 +1,31 @@
+seed: 6304
+
+pacs:
+  root: /content/pacs_data     # same PACS root as Task 2
+  source_domains: [photo, art_painting, cartoon]
+  target_domain: sketch
+  train_val_split: 0.8
+
+# The stratified source splits are cached at shared/splits/pacs_sketch_seed6304.json,
+# resolved relative to shared/pacs_protocol.py's own location (see build_or_load_splits).
+# Because Task 3 imports the SAME shared/ package as Task 2, running Task 3 after
+# Task 2 automatically reuses the exact same cached splits -- nothing to configure
+# here, just don't delete or regenerate that file independently from Task 3.
+
+batch:
+  per_source_domain: 8   # -> 24 total source examples per step (no target batch in Task 3)
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  max_epochs: 30
+  early_stop_patience: 5
+
+backbone:
+  weights: IMAGENET1K_V1
+  feat_dim: 512
+
+paths:
+  results_dir: ./results
+  checkpoints_dir: ./results/checkpoints
+  task2_source_only_checkpoint: ../task2/results/checkpoints/source_only.pt

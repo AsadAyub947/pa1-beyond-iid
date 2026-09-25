@@ -1,0 +1,4 @@
+base_config: base.yaml
+method: sam
+run_name: sam
+rho: 0.05   # controlled design study sweeps this over {0.01, 0.05, 0.1}

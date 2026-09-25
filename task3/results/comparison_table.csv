@@ -1,0 +1,4 @@
+method,photo_val_acc,art_painting_val_acc,cartoon_val_acc,photo_val_f1,art_painting_val_f1,cartoon_val_f1,mean_source_acc,mean_source_f1,worst_source_acc,worst_source_domain,worst_source_f1,sketch_acc,sketch_f1,sketch_acc_change_vs_erm,source_domain_separability,sharpness_delta,best_epoch
+erm,0.964,0.9415,0.9424,0.9581,0.9421,0.9466,0.9493,0.9489,0.9415,art_painting,0.9421,0.5729,0.584,0.0,0.86,0.318178,6
+dan_dg,0.967,0.8976,0.9403,0.9605,0.8947,0.9437,0.9349,0.9329,0.8976,art_painting,0.8947,0.5775,0.5766,0.0046,0.6867,0.346689,7
+sam,0.982,0.9268,0.9616,0.9782,0.9281,0.9667,0.9568,0.9576,0.9268,art_painting,0.9281,0.6831,0.6745,0.1102,0.8767,0.13529,15

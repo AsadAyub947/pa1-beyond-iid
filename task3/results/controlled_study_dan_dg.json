@@ -1,0 +1,44 @@
+[
+  {
+    "lambda_dg": 0.1,
+    "mean_source_acc": 0.9398,
+    "mean_source_f1": 0.9409,
+    "worst_source_acc": 0.9098,
+    "worst_source_domain": "art_painting",
+    "sketch_acc": 0.7233,
+    "sketch_f1": 0.745,
+    "sketch_acc_change_vs_erm": 0.1504,
+    "source_domain_separability": 0.8567,
+    "sharpness_delta": 0.348518,
+    "best_epoch": 7,
+    "checkpoint": "./results/checkpoints/dan_dg_lambda_dg0.1.pt"
+  },
+  {
+    "lambda_dg": 1.0,
+    "mean_source_acc": 0.9349,
+    "mean_source_f1": 0.9329,
+    "worst_source_acc": 0.8976,
+    "worst_source_domain": "art_painting",
+    "sketch_acc": 0.5775,
+    "sketch_f1": 0.5766,
+    "sketch_acc_change_vs_erm": 0.0046,
+    "source_domain_separability": 0.6867,
+    "sharpness_delta": 0.346689,
+    "best_epoch": 7,
+    "checkpoint": "./results/checkpoints/dan_dg.pt"
+  },
+  {
+    "lambda_dg": 10.0,
+    "mean_source_acc": 0.2563,
+    "mean_source_f1": 0.1512,
+    "worst_source_acc": 0.1812,
+    "worst_source_domain": "cartoon",
+    "sketch_acc": 0.1687,
+    "sketch_f1": 0.1012,
+    "sketch_acc_change_vs_erm": -0.4042,
+    "source_domain_separability": 0.54,
+    "sharpness_delta": 2.207767,
+    "best_epoch": 6,
+    "checkpoint": "./results/checkpoints/dan_dg_lambda_dg10.pt"
+  }
+]

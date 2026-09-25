@@ -1,0 +1,9 @@
+{
+  "study": "dan_dg",
+  "key": "lambda_dg",
+  "runs": {
+    "0.1": "./results/checkpoints/dan_dg_lambda_dg0.1.pt",
+    "1": "./results/checkpoints/dan_dg.pt",
+    "10": "./results/checkpoints/dan_dg_lambda_dg10.pt"
+  }
+}
