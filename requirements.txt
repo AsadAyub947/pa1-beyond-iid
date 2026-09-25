@@ -1,0 +1,13 @@
+# Tested on Google Colab (Python 3.13, NVIDIA T4). Install with:  pip install -r requirements.txt
+# On Colab, torch/torchvision are preinstalled; install a CUDA build from https://pytorch.org when running locally.
+torch>=2.1
+torchvision>=0.16
+open_clip_torch>=2.24     # Task 1 (CLIP ViT-B-32-quickgelu, openai weights)
+numpy>=1.23
+scipy>=1.9
+scikit-learn>=1.2
+pandas>=1.5               # Task 4
+matplotlib>=3.6
+pyyaml>=6.0
+pillow>=9.0
+umap-learn>=0.5           # optional: Task 1 with representation.method: umap

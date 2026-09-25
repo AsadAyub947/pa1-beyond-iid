@@ -1,0 +1,33 @@
+# NOTE: there is deliberately no blanket "data/" rule: task1/data/ and task4/data/
+# contain source code. Only the folders that hold downloaded datasets are ignored.
+
+# ---- datasets (downloaded by the code, never committed) ----
+task1/data_cache/
+pacs_data/
+task4/data/raw/*
+!task4/data/raw/.gitkeep
+*.tar.gz
+*.zip
+
+# ---- model weights, checkpoints, cached features ----
+# (checkpoint folders keep only their small logs: train_log.csv / train_summary.json)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+task1/weights/
+task4/cache/*
+!task4/cache/.gitkeep
+
+# ---- environments, caches, editors ----
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+wandb/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
