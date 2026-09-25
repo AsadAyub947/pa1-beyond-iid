@@ -1,0 +1,868 @@
+{
+  "config": {
+    "seed": 6304,
+    "use_pretrained": true,
+    "dataset": {
+      "name": "stl10",
+      "root": "./data_cache",
+      "image_size": 224,
+      "num_classes": 10,
+      "class_names": [
+        "airplane",
+        "bird",
+        "car",
+        "cat",
+        "deer",
+        "dog",
+        "horse",
+        "monkey",
+        "ship",
+        "truck"
+      ]
+    },
+    "subset": {
+      "n_test": 500,
+      "train_val_split": 0.8
+    },
+    "backbones": {
+      "resnet50": {
+        "weights": "IMAGENET1K_V2",
+        "feat_dim": 2048
+      },
+      "vit_b_16": {
+        "weights": "IMAGENET1K_V1",
+        "feat_dim": 768
+      },
+      "clip_vit_b32": {
+        "model_name": "ViT-B-32-quickgelu",
+        "pretrained": "openai",
+        "feat_dim": 512
+      }
+    },
+    "linear_head": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "max_epochs": 50,
+      "early_stop_patience": 5,
+      "batch_size": 32
+    },
+    "clip_zero_shot": {
+      "prompt_template": "a photo of a {class}."
+    },
+    "color_bias": {
+      "additional_transform": "hue_rotation",
+      "hue_shift": 0.25
+    },
+    "cue_conflict": {
+      "n_class_pairs": 5,
+      "class_pairs": null,
+      "per_direction": 20,
+      "max_candidates_per_direction": 40,
+      "backend": "adain_decoder",
+      "weights_dir": "./weights",
+      "style_strength": 1.0,
+      "style_center_crop": 0.7,
+      "optim_steps": 300,
+      "optim_lr": 0.02,
+      "rejection": {
+        "std_min": 0.02,
+        "texture_position_min": 0.5,
+        "structure_margin_min": 0.0
+      },
+      "manual_rejections": []
+    },
+    "translation": {
+      "displacements": [
+        0,
+        8,
+        16,
+        32
+      ],
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right"
+      ]
+    },
+    "patch_shuffle": {
+      "grid": 4
+    },
+    "representation": {
+      "method": "tsne",
+      "tsne_perplexity": 30,
+      "umap_n_neighbors": 15,
+      "umap_min_dist": 0.1
+    },
+    "paths": {
+      "results_dir": "./results"
+    }
+  },
+  "cue_conflict_generation": {
+    "backend": "adain_decoder",
+    "style_strength": 1.0,
+    "style_center_crop": 0.7,
+    "class_pairs": [
+      [
+        "monkey",
+        "ship"
+      ],
+      [
+        "cat",
+        "monkey"
+      ],
+      [
+        "airplane",
+        "truck"
+      ],
+      [
+        "bird",
+        "ship"
+      ],
+      [
+        "bird",
+        "dog"
+      ]
+    ],
+    "accepted": 200,
+    "rejected": 2,
+    "rejected_by_reason": {
+      "R1_degenerate": 0,
+      "R2_no_texture_transfer": 2,
+      "R3_shape_lost": 0,
+      "R4_manual": 0
+    },
+    "accepted_per_direction": {
+      "monkey->ship": 20,
+      "ship->monkey": 20,
+      "cat->monkey": 20,
+      "monkey->cat": 20,
+      "airplane->truck": 20,
+      "truck->airplane": 20,
+      "bird->ship": 20,
+      "ship->bird": 20,
+      "bird->dog": 20,
+      "dog->bird": 20
+    },
+    "rejection_rule": {
+      "std_min": 0.02,
+      "texture_position_min": 0.5,
+      "structure_margin_min": 0.0,
+      "manual_rejections": [],
+      "description": "R1 degenerate (non-finite or std<std_min); R2 texture statistics not closer to style than content; R3 relu4_1 layout not closer to content than style; R4 manual list. Uses the AdaIN VGG encoder only."
+    }
+  },
+  "backbones": {
+    "resnet50": {
+      "head_training": {
+        "best_val_acc": 0.9740000367164612,
+        "best_epoch": 7,
+        "epochs_run": 13,
+        "val_curve": [
+          {
+            "epoch": 0,
+            "val_acc": 0.9660000205039978,
+            "val_loss": 0.29511743783950806
+          },
+          {
+            "epoch": 1,
+            "val_acc": 0.9690000414848328,
+            "val_loss": 0.1660258024930954
+          },
+          {
+            "epoch": 2,
+            "val_acc": 0.971000075340271,
+            "val_loss": 0.1285896748304367
+          },
+          {
+            "epoch": 3,
+            "val_acc": 0.971000075340271,
+            "val_loss": 0.10997600108385086
+          },
+          {
+            "epoch": 4,
+            "val_acc": 0.9720000624656677,
+            "val_loss": 0.10149470716714859
+          },
+          {
+            "epoch": 5,
+            "val_acc": 0.9720000624656677,
+            "val_loss": 0.0941668376326561
+          },
+          {
+            "epoch": 6,
+            "val_acc": 0.9720000624656677,
+            "val_loss": 0.08875776827335358
+          },
+          {
+            "epoch": 7,
+            "val_acc": 0.9740000367164612,
+            "val_loss": 0.08931801468133926
+          },
+          {
+            "epoch": 8,
+            "val_acc": 0.9740000367164612,
+            "val_loss": 0.08448151499032974
+          },
+          {
+            "epoch": 9,
+            "val_acc": 0.9740000367164612,
+            "val_loss": 0.08243242651224136
+          },
+          {
+            "epoch": 10,
+            "val_acc": 0.9740000367164612,
+            "val_loss": 0.08138090372085571
+          },
+          {
+            "epoch": 11,
+            "val_acc": 0.9740000367164612,
+            "val_loss": 0.08130878955125809
+          },
+          {
+            "epoch": 12,
+            "val_acc": 0.9730000495910645,
+            "val_loss": 0.08046334981918335
+          }
+        ]
+      },
+      "clean_baseline": {
+        "top1_acc": 0.976,
+        "macro_f1": 0.975952082781452,
+        "mean_max_conf": 0.9621374607086182
+      },
+      "color_bias": {
+        "clean": {
+          "top1_acc": 0.976,
+          "macro_f1": 0.975952082781452,
+          "mean_max_conf": 0.9621374607086182
+        },
+        "grayscale": {
+          "top1_acc": 0.94,
+          "macro_f1": 0.9399863202426916,
+          "mean_max_conf": 0.9502888917922974,
+          "accuracy_delta_vs_clean": -0.03600000000000003,
+          "consistency_vs_clean": 0.952
+        },
+        "hue_rotation": {
+          "top1_acc": 0.948,
+          "macro_f1": 0.9483162742528292,
+          "mean_max_conf": 0.940409779548645,
+          "accuracy_delta_vs_clean": -0.028000000000000025,
+          "consistency_vs_clean": 0.962
+        }
+      },
+      "shape_texture": {
+        "n_total": 200,
+        "n_shape": 69,
+        "n_texture": 57,
+        "n_other": 74,
+        "shape_bias_pct": 54.76190476190476,
+        "coverage_pct": 63.0
+      },
+      "translation_curve": [
+        {
+          "displacement_px": 0,
+          "top1_acc": 0.976,
+          "macro_f1": 0.975952082781452,
+          "mean_max_conf": 0.9621374607086182,
+          "consistency_vs_clean": 1.0,
+          "per_direction_acc": {
+            "up": 0.976,
+            "down": 0.976,
+            "left": 0.976,
+            "right": 0.976
+          },
+          "per_direction_consistency": {
+            "up": 1.0,
+            "down": 1.0,
+            "left": 1.0,
+            "right": 1.0
+          }
+        },
+        {
+          "displacement_px": 8,
+          "top1_acc": 0.967,
+          "macro_f1": 0.9671293727251666,
+          "mean_max_conf": 0.9595086425542831,
+          "consistency_vs_clean": 0.9854999999999999,
+          "per_direction_acc": {
+            "up": 0.968,
+            "down": 0.96,
+            "left": 0.972,
+            "right": 0.968
+          },
+          "per_direction_consistency": {
+            "up": 0.986,
+            "down": 0.98,
+            "left": 0.988,
+            "right": 0.988
+          }
+        },
+        {
+          "displacement_px": 16,
+          "top1_acc": 0.9665,
+          "macro_f1": 0.9665707468180018,
+          "mean_max_conf": 0.9588271081447601,
+          "consistency_vs_clean": 0.9835,
+          "per_direction_acc": {
+            "up": 0.972,
+            "down": 0.966,
+            "left": 0.964,
+            "right": 0.964
+          },
+          "per_direction_consistency": {
+            "up": 0.988,
+            "down": 0.982,
+            "left": 0.98,
+            "right": 0.984
+          }
+        },
+        {
+          "displacement_px": 32,
+          "top1_acc": 0.962,
+          "macro_f1": 0.9621993152728593,
+          "mean_max_conf": 0.9525388032197952,
+          "consistency_vs_clean": 0.977,
+          "per_direction_acc": {
+            "up": 0.97,
+            "down": 0.962,
+            "left": 0.958,
+            "right": 0.958
+          },
+          "per_direction_consistency": {
+            "up": 0.984,
+            "down": 0.974,
+            "left": 0.978,
+            "right": 0.972
+          }
+        }
+      ],
+      "patch_shuffle": {
+        "clean": {
+          "top1_acc": 0.976,
+          "macro_f1": 0.975952082781452,
+          "mean_max_conf": 0.9621374607086182
+        },
+        "shuffled": {
+          "top1_acc": 0.896,
+          "macro_f1": 0.8965255178350633,
+          "mean_max_conf": 0.9096124172210693,
+          "accuracy_drop": 0.07999999999999996,
+          "consistency_vs_clean": 0.906
+        }
+      },
+      "representation_stability": {
+        "grayscale": 0.798108696937561,
+        "hue_rotation": 0.7494564056396484,
+        "patch_shuffle": 0.6922571659088135,
+        "cue_conflict_vs_source_content": 0.2934432923793793,
+        "translation_8px": 0.9666697233915329,
+        "translation_16px": 0.9508897811174393,
+        "translation_32px": 0.9305110573768616
+      },
+      "cosine_baselines_clean": {
+        "random_pair": 0.22188542783260345,
+        "same_class_pair": 0.4540621083378792
+      }
+    },
+    "vit_b_16": {
+      "head_training": {
+        "best_val_acc": 0.9790000319480896,
+        "best_epoch": 5,
+        "epochs_run": 11,
+        "val_curve": [
+          {
+            "epoch": 0,
+            "val_acc": 0.9720000624656677,
+            "val_loss": 0.1475437581539154
+          },
+          {
+            "epoch": 1,
+            "val_acc": 0.9760000705718994,
+            "val_loss": 0.10186206549406052
+          },
+          {
+            "epoch": 2,
+            "val_acc": 0.9770000576972961,
+            "val_loss": 0.08756459504365921
+          },
+          {
+            "epoch": 3,
+            "val_acc": 0.9770000576972961,
+            "val_loss": 0.08062981814146042
+          },
+          {
+            "epoch": 4,
+            "val_acc": 0.9780000448226929,
+            "val_loss": 0.07572831958532333
+          },
+          {
+            "epoch": 5,
+            "val_acc": 0.9790000319480896,
+            "val_loss": 0.07309021055698395
+          },
+          {
+            "epoch": 6,
+            "val_acc": 0.9780000448226929,
+            "val_loss": 0.07259390503168106
+          },
+          {
+            "epoch": 7,
+            "val_acc": 0.9790000319480896,
+            "val_loss": 0.07128599286079407
+          },
+          {
+            "epoch": 8,
+            "val_acc": 0.9780000448226929,
+            "val_loss": 0.07004301249980927
+          },
+          {
+            "epoch": 9,
+            "val_acc": 0.9780000448226929,
+            "val_loss": 0.06981819123029709
+          },
+          {
+            "epoch": 10,
+            "val_acc": 0.9790000319480896,
+            "val_loss": 0.06993582099676132
+          }
+        ]
+      },
+      "clean_baseline": {
+        "top1_acc": 0.976,
+        "macro_f1": 0.976049198170213,
+        "mean_max_conf": 0.972952127456665
+      },
+      "color_bias": {
+        "clean": {
+          "top1_acc": 0.976,
+          "macro_f1": 0.976049198170213,
+          "mean_max_conf": 0.972952127456665
+        },
+        "grayscale": {
+          "top1_acc": 0.948,
+          "macro_f1": 0.9483528775576884,
+          "mean_max_conf": 0.9625068306922913,
+          "accuracy_delta_vs_clean": -0.028000000000000025,
+          "consistency_vs_clean": 0.972
+        },
+        "hue_rotation": {
+          "top1_acc": 0.936,
+          "macro_f1": 0.9357635720816511,
+          "mean_max_conf": 0.9458550810813904,
+          "accuracy_delta_vs_clean": -0.039999999999999925,
+          "consistency_vs_clean": 0.952
+        }
+      },
+      "shape_texture": {
+        "n_total": 200,
+        "n_shape": 104,
+        "n_texture": 27,
+        "n_other": 69,
+        "shape_bias_pct": 79.38931297709924,
+        "coverage_pct": 65.5
+      },
+      "translation_curve": [
+        {
+          "displacement_px": 0,
+          "top1_acc": 0.976,
+          "macro_f1": 0.976049198170213,
+          "mean_max_conf": 0.972952127456665,
+          "consistency_vs_clean": 1.0,
+          "per_direction_acc": {
+            "up": 0.976,
+            "down": 0.976,
+            "left": 0.976,
+            "right": 0.976
+          },
+          "per_direction_consistency": {
+            "up": 1.0,
+            "down": 1.0,
+            "left": 1.0,
+            "right": 1.0
+          }
+        },
+        {
+          "displacement_px": 8,
+          "top1_acc": 0.9730000000000001,
+          "macro_f1": 0.9731399709827138,
+          "mean_max_conf": 0.970902144908905,
+          "consistency_vs_clean": 0.988,
+          "per_direction_acc": {
+            "up": 0.974,
+            "down": 0.976,
+            "left": 0.968,
+            "right": 0.974
+          },
+          "per_direction_consistency": {
+            "up": 0.99,
+            "down": 0.988,
+            "left": 0.984,
+            "right": 0.99
+          }
+        },
+        {
+          "displacement_px": 16,
+          "top1_acc": 0.974,
+          "macro_f1": 0.9740710780922114,
+          "mean_max_conf": 0.9713673889636993,
+          "consistency_vs_clean": 0.9949999999999999,
+          "per_direction_acc": {
+            "up": 0.974,
+            "down": 0.972,
+            "left": 0.974,
+            "right": 0.976
+          },
+          "per_direction_consistency": {
+            "up": 0.998,
+            "down": 0.994,
+            "left": 0.994,
+            "right": 0.994
+          }
+        },
+        {
+          "displacement_px": 32,
+          "top1_acc": 0.9675,
+          "macro_f1": 0.9676194185784808,
+          "mean_max_conf": 0.9678633064031601,
+          "consistency_vs_clean": 0.9875,
+          "per_direction_acc": {
+            "up": 0.97,
+            "down": 0.974,
+            "left": 0.966,
+            "right": 0.96
+          },
+          "per_direction_consistency": {
+            "up": 0.994,
+            "down": 0.992,
+            "left": 0.986,
+            "right": 0.978
+          }
+        }
+      ],
+      "patch_shuffle": {
+        "clean": {
+          "top1_acc": 0.976,
+          "macro_f1": 0.976049198170213,
+          "mean_max_conf": 0.972952127456665
+        },
+        "shuffled": {
+          "top1_acc": 0.908,
+          "macro_f1": 0.908369796023428,
+          "mean_max_conf": 0.9071351289749146,
+          "accuracy_drop": 0.06799999999999995,
+          "consistency_vs_clean": 0.924
+        }
+      },
+      "representation_stability": {
+        "grayscale": 0.731627345085144,
+        "hue_rotation": 0.7160162329673767,
+        "patch_shuffle": 0.6275573968887329,
+        "cue_conflict_vs_source_content": 0.2738364338874817,
+        "translation_8px": 0.9448487907648087,
+        "translation_16px": 0.9759551137685776,
+        "translation_32px": 0.9443813860416412
+      },
+      "cosine_baselines_clean": {
+        "random_pair": 0.06875541061162949,
+        "same_class_pair": 0.291055814050138
+      }
+    },
+    "clip_vit_b32": {
+      "head_training": {
+        "best_val_acc": 0.9860000610351562,
+        "best_epoch": 6,
+        "epochs_run": 12,
+        "val_curve": [
+          {
+            "epoch": 0,
+            "val_acc": 0.9780000448226929,
+            "val_loss": 1.7945250272750854
+          },
+          {
+            "epoch": 1,
+            "val_acc": 0.9820000529289246,
+            "val_loss": 1.385891079902649
+          },
+          {
+            "epoch": 2,
+            "val_acc": 0.9820000529289246,
+            "val_loss": 1.069685459136963
+          },
+          {
+            "epoch": 3,
+            "val_acc": 0.9810000658035278,
+            "val_loss": 0.8354458212852478
+          },
+          {
+            "epoch": 4,
+            "val_acc": 0.984000027179718,
+            "val_loss": 0.665030837059021
+          },
+          {
+            "epoch": 5,
+            "val_acc": 0.984000027179718,
+            "val_loss": 0.5409947633743286
+          },
+          {
+            "epoch": 6,
+            "val_acc": 0.9860000610351562,
+            "val_loss": 0.44942373037338257
+          },
+          {
+            "epoch": 7,
+            "val_acc": 0.9850000739097595,
+            "val_loss": 0.3807229995727539
+          },
+          {
+            "epoch": 8,
+            "val_acc": 0.9860000610351562,
+            "val_loss": 0.32799601554870605
+          },
+          {
+            "epoch": 9,
+            "val_acc": 0.9860000610351562,
+            "val_loss": 0.2866727113723755
+          },
+          {
+            "epoch": 10,
+            "val_acc": 0.9860000610351562,
+            "val_loss": 0.2536875009536743
+          },
+          {
+            "epoch": 11,
+            "val_acc": 0.9860000610351562,
+            "val_loss": 0.2270178645849228
+          }
+        ]
+      },
+      "clean_baseline": {
+        "top1_acc": 0.974,
+        "macro_f1": 0.9739939482172373,
+        "mean_max_conf": 0.654132068157196
+      },
+      "color_bias": {
+        "clean": {
+          "top1_acc": 0.974,
+          "macro_f1": 0.9739939482172373,
+          "mean_max_conf": 0.654132068157196
+        },
+        "grayscale": {
+          "top1_acc": 0.936,
+          "macro_f1": 0.9358325008739701,
+          "mean_max_conf": 0.5978751182556152,
+          "accuracy_delta_vs_clean": -0.03799999999999992,
+          "consistency_vs_clean": 0.94
+        },
+        "hue_rotation": {
+          "top1_acc": 0.928,
+          "macro_f1": 0.9279228861130532,
+          "mean_max_conf": 0.5738820433616638,
+          "accuracy_delta_vs_clean": -0.04599999999999993,
+          "consistency_vs_clean": 0.94
+        }
+      },
+      "shape_texture": {
+        "n_total": 200,
+        "n_shape": 121,
+        "n_texture": 19,
+        "n_other": 60,
+        "shape_bias_pct": 86.42857142857143,
+        "coverage_pct": 70.0
+      },
+      "translation_curve": [
+        {
+          "displacement_px": 0,
+          "top1_acc": 0.974,
+          "macro_f1": 0.9739939482172373,
+          "mean_max_conf": 0.654132068157196,
+          "consistency_vs_clean": 1.0,
+          "per_direction_acc": {
+            "up": 0.974,
+            "down": 0.974,
+            "left": 0.974,
+            "right": 0.974
+          },
+          "per_direction_consistency": {
+            "up": 1.0,
+            "down": 1.0,
+            "left": 1.0,
+            "right": 1.0
+          }
+        },
+        {
+          "displacement_px": 8,
+          "top1_acc": 0.969,
+          "macro_f1": 0.9689073462505453,
+          "mean_max_conf": 0.6509116590023041,
+          "consistency_vs_clean": 0.978,
+          "per_direction_acc": {
+            "up": 0.972,
+            "down": 0.972,
+            "left": 0.972,
+            "right": 0.96
+          },
+          "per_direction_consistency": {
+            "up": 0.98,
+            "down": 0.982,
+            "left": 0.982,
+            "right": 0.968
+          }
+        },
+        {
+          "displacement_px": 16,
+          "top1_acc": 0.9645,
+          "macro_f1": 0.9645137274652943,
+          "mean_max_conf": 0.6397782862186432,
+          "consistency_vs_clean": 0.9695,
+          "per_direction_acc": {
+            "up": 0.962,
+            "down": 0.962,
+            "left": 0.962,
+            "right": 0.972
+          },
+          "per_direction_consistency": {
+            "up": 0.97,
+            "down": 0.968,
+            "left": 0.964,
+            "right": 0.976
+          }
+        },
+        {
+          "displacement_px": 32,
+          "top1_acc": 0.9575,
+          "macro_f1": 0.9574983091951499,
+          "mean_max_conf": 0.6240791231393814,
+          "consistency_vs_clean": 0.97,
+          "per_direction_acc": {
+            "up": 0.95,
+            "down": 0.966,
+            "left": 0.956,
+            "right": 0.958
+          },
+          "per_direction_consistency": {
+            "up": 0.96,
+            "down": 0.976,
+            "left": 0.968,
+            "right": 0.976
+          }
+        }
+      ],
+      "patch_shuffle": {
+        "clean": {
+          "top1_acc": 0.974,
+          "macro_f1": 0.9739939482172373,
+          "mean_max_conf": 0.654132068157196
+        },
+        "shuffled": {
+          "top1_acc": 0.834,
+          "macro_f1": 0.8332645927151793,
+          "mean_max_conf": 0.41072598099708557,
+          "accuracy_drop": 0.14,
+          "consistency_vs_clean": 0.84
+        }
+      },
+      "representation_stability": {
+        "grayscale": 0.8876953125,
+        "hue_rotation": 0.8842677474021912,
+        "patch_shuffle": 0.7454907298088074,
+        "cue_conflict_vs_source_content": 0.7007282376289368,
+        "translation_8px": 0.9777829051017761,
+        "translation_16px": 0.9634047001600266,
+        "translation_32px": 0.9666227549314499
+      },
+      "cosine_baselines_clean": {
+        "random_pair": 0.5918477177619934,
+        "same_class_pair": 0.7369335092306137
+      }
+    }
+  },
+  "clip_zero_shot": {
+    "clean_baseline": {
+      "top1_acc": 0.964,
+      "macro_f1": 0.9639862389675955,
+      "mean_max_conf": 0.9360694289207458
+    },
+    "color_bias": {
+      "clean": {
+        "top1_acc": 0.964,
+        "macro_f1": 0.9639862389675955,
+        "mean_max_conf": 0.9360694289207458
+      },
+      "grayscale": {
+        "top1_acc": 0.918,
+        "macro_f1": 0.9177252040171965,
+        "mean_max_conf": 0.927460253238678,
+        "accuracy_delta_vs_clean": -0.04599999999999993,
+        "consistency_vs_clean": 0.922
+      },
+      "hue_rotation": {
+        "top1_acc": 0.928,
+        "macro_f1": 0.9275708824753867,
+        "mean_max_conf": 0.9156547784805298,
+        "accuracy_delta_vs_clean": -0.03599999999999992,
+        "consistency_vs_clean": 0.934
+      }
+    },
+    "shape_texture": {
+      "n_total": 200,
+      "n_shape": 124,
+      "n_texture": 21,
+      "n_other": 55,
+      "shape_bias_pct": 85.51724137931035,
+      "coverage_pct": 72.5
+    },
+    "translation_curve": [
+      {
+        "displacement_px": 0,
+        "top1_acc": 0.964,
+        "macro_f1": 0.9639862389675955,
+        "mean_max_conf": 0.9360694289207458,
+        "consistency_vs_clean": 1.0
+      },
+      {
+        "displacement_px": 8,
+        "top1_acc": 0.9595,
+        "macro_f1": 0.959323611747943,
+        "mean_max_conf": 0.9364319443702698,
+        "consistency_vs_clean": 0.965
+      },
+      {
+        "displacement_px": 16,
+        "top1_acc": 0.9589999999999999,
+        "macro_f1": 0.958948752767766,
+        "mean_max_conf": 0.9330398291349411,
+        "consistency_vs_clean": 0.9655
+      },
+      {
+        "displacement_px": 32,
+        "top1_acc": 0.943,
+        "macro_f1": 0.9430548398529919,
+        "mean_max_conf": 0.9255951046943665,
+        "consistency_vs_clean": 0.963
+      }
+    ],
+    "patch_shuffle": {
+      "clean": {
+        "top1_acc": 0.964,
+        "macro_f1": 0.9639862389675955,
+        "mean_max_conf": 0.9360694289207458
+      },
+      "shuffled": {
+        "top1_acc": 0.814,
+        "macro_f1": 0.8137449915069878,
+        "mean_max_conf": 0.7959393858909607,
+        "accuracy_drop": 0.15000000000000002,
+        "consistency_vs_clean": 0.826
+      }
+    },
+    "agreement_with_trained_clip_head": {
+      "clean": 0.962,
+      "grayscale": 0.946,
+      "hue_rotation": 0.944,
+      "patch_shuffle": 0.858,
+      "cue_conflict": 0.71
+    }
+  }
+}

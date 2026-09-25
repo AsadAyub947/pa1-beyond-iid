@@ -1,0 +1,72 @@
+seed: 6304
+
+dataset:
+  name: stl10               # "stl10" (recommended) or "oxford_pets"
+  root: ./data_cache
+  image_size: 224
+  num_classes: 10           # 10 for STL-10; 37 for Oxford-IIIT Pets
+  class_names:              # STL-10 official class order
+    - airplane
+    - bird
+    - car
+    - cat
+    - deer
+    - dog
+    - horse
+    - monkey
+    - ship
+    - truck
+
+subset:
+  n_test: 500                # class-balanced test subset size
+  train_val_split: 0.8        # stratified 80/20 split of the official train partition
+
+backbones:
+  resnet50:
+    weights: IMAGENET1K_V2
+    feat_dim: 2048
+  vit_b_16:
+    weights: IMAGENET1K_V1
+    feat_dim: 768
+  clip_vit_b32:
+    pretrained: openai
+    feat_dim: 512
+
+linear_head:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  max_epochs: 50
+  early_stop_patience: 5
+  batch_size: 16
+
+clip_zero_shot:
+  prompt_template: "a photo of a {class}."
+
+color_bias:
+  additional_transform: hue_rotation   # one of: hue_rotation | palette_transfer | class_swap_stats
+  hue_shift: 0.25                       # in [-0.5, 0.5]; 0.25 == 90 degree hue rotation
+
+cue_conflict:
+  n_class_pairs: 5
+  target_total_conflicts: 200
+  adain_layer: relu4_1
+  style_strength: 1.0          # 0 = no style transfer, 1 = full AdaIN statistics match
+  optim_steps: 300             # optimization-based AdaIN (see data/make_cue_conflicts.py)
+  optim_lr: 0.05
+  rejection_std_threshold: 0.02   # reject stylizations whose pixel std collapses below this
+
+translation:
+  displacements: [0, 8, 16, 32]
+  directions: [up, down, left, right]
+
+patch_shuffle:
+  grid: 4
+
+representation:
+  method: tsne   # "tsne" or "umap"
+  tsne_perplexity: 30
+  umap_n_neighbors: 15
+  umap_min_dist: 0.1
+
+paths:
+  results_dir: ./results
