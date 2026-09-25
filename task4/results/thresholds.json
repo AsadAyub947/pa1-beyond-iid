@@ -1,0 +1,89 @@
+{
+  "rule": "tau = 95th percentile of u on CIFAR-10 validation; accept iff u <= tau",
+  "thresholds": {
+    "vanilla/msp": {
+      "tau": 0.15828604332598187,
+      "val_accept": 0.95,
+      "test_accept": 0.9462,
+      "csa": 0.9482
+    },
+    "vanilla/mls": {
+      "tau": -5.780368304252624,
+      "val_accept": 0.95,
+      "test_accept": 0.9511,
+      "csa": 0.9482
+    },
+    "vanilla/energy": {
+      "tau": -5.967682782611775,
+      "val_accept": 0.95,
+      "test_accept": 0.9529,
+      "csa": 0.9482
+    },
+    "vanilla/mahalanobis": {
+      "tau": 2929.3096842369573,
+      "val_accept": 0.95,
+      "test_accept": 0.9479,
+      "csa": 0.9482
+    },
+    "gcsc/msp": {
+      "tau": 0.20267972818178817,
+      "val_accept": 0.95,
+      "test_accept": 0.9519,
+      "csa": 0.9496
+    },
+    "gcsc/mls": {
+      "tau": -5.989351606369016,
+      "val_accept": 0.95,
+      "test_accept": 0.9532,
+      "csa": 0.9496
+    },
+    "gcsc/energy": {
+      "tau": -6.218033359505221,
+      "val_accept": 0.95,
+      "test_accept": 0.9529,
+      "csa": 0.9496
+    },
+    "gcsc/mahalanobis": {
+      "tau": 1976.484687410472,
+      "val_accept": 0.95,
+      "test_accept": 0.9516,
+      "csa": 0.9496
+    },
+    "proser/msp": {
+      "tau": 0.17358581045221616,
+      "val_accept": 0.95,
+      "test_accept": 0.9501,
+      "csa": 0.9419
+    },
+    "proser/mls": {
+      "tau": -4.825717067718504,
+      "val_accept": 0.95,
+      "test_accept": 0.9537,
+      "csa": 0.9419
+    },
+    "proser/energy": {
+      "tau": -5.036694703472264,
+      "val_accept": 0.95,
+      "test_accept": 0.954,
+      "csa": 0.9419
+    },
+    "proser/mahalanobis": {
+      "tau": 2634.2369528770737,
+      "val_accept": 0.95,
+      "test_accept": 0.9515,
+      "csa": 0.9419
+    },
+    "proser/proser_dummy": {
+      "tau": 0.6307086397811072,
+      "val_accept": 0.95,
+      "test_accept": 0.9554,
+      "csa": 0.9419
+    },
+    "proser/proser_margin": {
+      "tau": 0.7620914697647099,
+      "val_accept": 0.95,
+      "test_accept": 0.9544,
+      "csa": 0.9419
+    }
+  }
+}

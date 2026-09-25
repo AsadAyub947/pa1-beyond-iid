@@ -1,0 +1,9 @@
+{
+  "first_unknown_extraction": "2026-09-24 23:12:45",
+  "checkpoints": {
+    "checkpoints/vanilla/best.pt": "1df0ed91235f16cb6d5903d772afb406acf37895c3d28fa3824965693e5bbf39",
+    "checkpoints/gcsc/best.pt": "11be90352ab61d1de12448cf5635ea69252a859bee3e569f848be166e9df6e46",
+    "checkpoints/proser/best.pt": "5f80a82d22fc3f5e29e2a2504b9f63b5b65eb50389f035c1ebfe54c7a04a177b"
+  },
+  "note": "Checkpoints and score definitions frozen before CIFAR-100 unknowns were evaluated."
+}

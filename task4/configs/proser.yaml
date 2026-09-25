@@ -1,0 +1,43 @@
+# Step 4 – PROSER: fine-tune the selected Vanilla checkpoint with classifier
+# placeholders (beta = 1) and manifold-mixup data placeholders (gamma = 0.1).
+name: proser
+method: proser
+seed: 6304
+device: auto
+
+data:
+  root: data/raw
+  download: true
+  split_file: data/splits/cifar10_train90_val10_seed6304.json
+  val_fraction: 0.1
+  num_workers: 4
+  randaugment: null          # standard crop + flip augmentation
+  synthetic: null
+
+model:
+  num_classes: 10
+
+proser:
+  init_checkpoint: checkpoints/vanilla/best.pt
+  num_dummy: 5               # five randomly initialised dummy classifiers
+  beta: 1.0                  # classifier-placeholder loss weight
+  gamma: 0.1                 # data-placeholder loss weight
+  mixup_alpha: 2.0           # lambda ~ Beta(2, 2)
+  mixup_layer: layer2        # mix after layer2, before layer3 (fixed in code)
+  lambda_per_sample: false   # false = one lambda per mini-batch (reference code); true = per pair
+
+train:
+  epochs: 50
+  batch_size: 128            # first 64 -> classifier placeholders, last 64 -> data placeholders
+  lr: 1.0e-3
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  nesterov: false
+  scheduler: cosine
+  amp: true
+  eval_batch_size: 512
+  deterministic: false
+
+output:
+  checkpoint_dir: checkpoints/proser
+  cache_dir: cache/proser

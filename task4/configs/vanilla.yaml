@@ -1,0 +1,33 @@
+# Step 1 – Vanilla closed-set baseline (ResNet-18, cross-entropy, from scratch)
+name: vanilla
+method: vanilla
+seed: 6304
+device: auto                 # auto | cuda | cpu | mps
+
+data:
+  root: data/raw             # CIFAR-10 / CIFAR-100 are downloaded here by torchvision
+  download: true
+  split_file: data/splits/cifar10_train90_val10_seed6304.json
+  val_fraction: 0.1
+  num_workers: 4
+  randaugment: null          # no RandAugment for Vanilla
+  synthetic: null            # smoke tests only – never set for real runs
+
+model:
+  num_classes: 10
+
+train:
+  epochs: 100
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  nesterov: false
+  scheduler: cosine          # CosineAnnealingLR over `epochs`, stepped once per epoch
+  amp: true                  # mixed precision on CUDA (losses computed in float32)
+  eval_batch_size: 512
+  deterministic: false       # true = cudnn deterministic (slower)
+
+output:
+  checkpoint_dir: checkpoints/vanilla
+  cache_dir: cache/vanilla

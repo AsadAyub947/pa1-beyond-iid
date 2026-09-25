@@ -1,0 +1,39 @@
+# Step 5 (optional) – Reciprocal Point Learning, same ResNet-18, CIFAR-10 only
+name: rpl
+method: rpl
+seed: 6304
+device: auto
+
+data:
+  root: data/raw
+  download: true
+  split_file: data/splits/cifar10_train90_val10_seed6304.json
+  val_fraction: 0.1
+  num_workers: 4
+  randaugment: null
+  synthetic: null
+
+model:
+  num_classes: 10
+
+rpl:
+  temperature: 1.0           # CE(d / T, y)
+  lambda_open: 0.1           # weight of the open-space regulariser
+  open_space: mse            # mse = authors' code (d - R)^2 ; hinge = max(d - R, 0)
+  point_init_scale: 0.1
+
+train:
+  epochs: 100
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  nesterov: false
+  scheduler: cosine
+  amp: true
+  eval_batch_size: 512
+  deterministic: false
+
+output:
+  checkpoint_dir: checkpoints/rpl
+  cache_dir: cache/rpl

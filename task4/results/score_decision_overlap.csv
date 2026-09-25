@@ -1,0 +1,13 @@
+score_a,score_b,group,both_reject,only_a_rejects,only_b_rejects,both_accept
+msp,mls,near,0.235,0.04375,0.08375,0.6375
+msp,mls,far,0.38625,0.05,0.14375,0.42
+msp,energy,near,0.22625,0.0525,0.10375,0.6175
+msp,energy,far,0.38,0.05625,0.16375,0.4
+msp,mahalanobis,near,0.24125,0.0375,0.03875,0.6825
+msp,mahalanobis,far,0.40875,0.0275,0.11375,0.45
+mls,energy,near,0.31,0.00875,0.02,0.66125
+mls,energy,far,0.52375,0.00625,0.02,0.45
+mls,mahalanobis,near,0.225,0.09375,0.055,0.62625
+mls,mahalanobis,far,0.4225,0.1075,0.1,0.37
+energy,mahalanobis,near,0.21875,0.11125,0.06125,0.60875
+energy,mahalanobis,far,0.41875,0.125,0.10375,0.3525

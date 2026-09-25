@@ -1,0 +1,35 @@
+# Step 3 – GCSC: identical to Vanilla except RandAugment(2, 9) after crop+flip
+name: gcsc
+method: gcsc
+seed: 6304
+device: auto
+
+data:
+  root: data/raw
+  download: true
+  split_file: data/splits/cifar10_train90_val10_seed6304.json
+  val_fraction: 0.1
+  num_workers: 4             # RandAugment is CPU-heavy; raise if you have spare CPU cores
+  randaugment:
+    num_ops: 2
+    magnitude: 9
+  synthetic: null
+
+model:
+  num_classes: 10
+
+train:
+  epochs: 100
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  nesterov: false
+  scheduler: cosine
+  amp: true
+  eval_batch_size: 512
+  deterministic: false
+
+output:
+  checkpoint_dir: checkpoints/gcsc
+  cache_dir: cache/gcsc
